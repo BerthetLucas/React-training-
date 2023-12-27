@@ -11,10 +11,12 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [qty, setQty] = useState(null);
 
+  // Information from BrandFilter to ItemCard to set a filter on the product Display
   const newFiltre = (item) => {
     setFiltre(item);
   };
 
+  // Information to display ModaleCart
   const openCart = (item) => {
     setCartDisplay(item);
   };
@@ -24,21 +26,23 @@ function App() {
     setCartDisplay(item);
   };
 
+  // Inforation from ItemCard to ModaleCart to generate a table to display the cart content
   const addToCart = (item) => {
     cartList.push(item);
     setCounter(cartList.length);
   };
 
+  // Information from ItemCard to ModaleCart to pass product quantity to the Cart 
   const addqty = (value) => {
     setQty(value);
   };
 
   const deleteItem = (index) => {
-    // Not possible to modify directly Arry CartList, have to generate a new one and update cartList value
+    // Not possible to modify directly Array CartList, have to generate a new one and update cartList value
     let newTab = cartList.slice();
     newTab.splice(index, 1);
     setCartList(newTab);
-    setCounter(newTab.length)
+    setCounter(newTab.length);
   };
 
   return (

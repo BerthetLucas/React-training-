@@ -1,16 +1,17 @@
 function ModaleCart({ cart, cartOrder, cartList, suppr }) {
-
   const imgPath = "../../src/assets/img/";
 
-  // It's very likely there's another way to change cart State without send something to App.jsx
+  // To hide the modale when the button "close cart" is clicked.
   function closeCart(item) {
     cartOrder(item);
   }
+
+  // Delete item in the cart depending on the item index in the props cartList
   function deleteItem(index) {
     suppr(index);
-    console.log(index);
   }
 
+  // Total price calulation
   let total = () => {
     let sum = 0;
     for (let i = 0; i < cartList.length; i++) {
@@ -45,6 +46,7 @@ function ModaleCart({ cart, cartOrder, cartList, suppr }) {
                     <span>{item.name}</span>
                     <span>Prix : {item.price}€</span>
                     <span>Qte : {item.qty}</span>
+                    {/* Price calculation per item depending on the quantity  */}
                     <span>TOTAL : {item.qty * item.price}€</span>
                   </div>
                   <button onClick={() => deleteItem(index)}>Delete Item</button>

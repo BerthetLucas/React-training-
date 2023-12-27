@@ -1,25 +1,28 @@
-
 import { useState } from "react";
 import { HOODIES } from "../assets/data/hoodies";
 
-function ItemCard({ filtre, cartList}) {
-
+function ItemCard({ filtre, cartList }) {
   const hoodieList = HOODIES;
   const imgPath = "../../src/assets/img/";
 
-  const [qty, setQty] = useState(0); 
+  const [qty, setQty] = useState(0);
 
-// Selection filter 
+  // Display logic depends on the activate filter 
   const filteredList = () => {
+    // New tab in order to let the root data clean with slice method
     let newTab = hoodieList.slice();
+
+    // Brand's filter
     if (filtre && filtre != "price" && filtre != "all") {
       newTab = newTab.filter((item) => item.brand === filtre);
       return newTab;
     }
+    // Price's filter 
     if (filtre == "price") {
       newTab = newTab.filter((item) => item.price < 100);
       return newTab;
     }
+    // Reset filter
     if (filtre == "all") {
       newTab = hoodieList.slice();
       return newTab;
@@ -27,13 +30,12 @@ function ItemCard({ filtre, cartList}) {
     return newTab;
   };
 
-
-  // Use of object destructuring to add the propos qty modified by the select qty
-  function addToCart(item){
-    let fullItem = {...item,'qty' : qty }
-    cartList(fullItem) 
-    console.log(fullItem)
-    setQty(0)
+  // Use of object destructuring to add qty setting in the props cartList and send item data + qty to the ModaleCart component 
+  function addToCart(item) {
+    let fullItem = { ...item, qty: qty };
+    cartList(fullItem);
+    console.log(fullItem);
+    setQty(0);
   }
 
   return (
@@ -78,7 +80,7 @@ function ItemCard({ filtre, cartList}) {
                     <select onChange={(e) => setQty(parseInt(e.target.value))}>
                       <option value="0">0</option>
                       <option value="1">1</option>
-                      <option value="2">2</option> 
+                      <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
